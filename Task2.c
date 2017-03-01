@@ -4,8 +4,8 @@
 
 int main()
 {
-	struct tm *currentTimeinfo;
-    struct tm *birthDate = malloc(sizeof(struct tm));
+	struct tm *currentTimeinfo; // Structure contains information about current time
+    struct tm *birthDate = malloc(sizeof(struct tm)); // Structure contains information about user's birth time
 	time_t currentRawtime;
 	time_t birthRawtime;
 
@@ -14,7 +14,7 @@ int main()
 	printf("Enter your date and time of birth (dd.mm.yyyy hh:mm): ");
 	scanf("%d.%d.%d %d:%d", &(birthDate->tm_mday), &(birthDate->tm_mon), &(birthDate->tm_year), &(birthDate->tm_hour), &(birthDate->tm_min));
 	
-    
+    // Adjusting data so that mktime function would work correctly
     birthDate->tm_mon--;
 	birthDate->tm_year -= 1900;
 	birthDate->tm_sec = 0;
