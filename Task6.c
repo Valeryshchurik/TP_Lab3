@@ -17,13 +17,8 @@ Seat arr[PLACE_COUNT]; // Array of all seats in the plane
 int ids[PLACE_COUNT]; // Array used for sorting booked seats alphabetically
 void add(int);
 void rem(int);
+void swap (int*, int*);
 
-void swap(int *a, int *b)
-{
-    int tmp = *b;
-    *b = *a;
-    *a = tmp;
-}
 
 int main()
 {
@@ -206,4 +201,11 @@ void rem(int idx)
         swap(&(ids[i]), &(ids[i - 1]));
     }
     places_free++;
+}
+
+void swap(int *a, int *b)
+{
+    int tmp = *b;
+    *b = *a;
+    *a = tmp;
 }
