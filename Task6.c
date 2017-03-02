@@ -13,9 +13,8 @@ typedef struct _Seat
 	char last_name[80];
 } Seat;
 
-Seat arr[PLACE_COUNT];
-int ids[PLACE_COUNT];
-
+Seat arr[PLACE_COUNT]; // Array of all seats in the plane
+int ids[PLACE_COUNT]; // Array used for sorting booked seats alphabetically
 void add(int);
 void rem(int);
 
@@ -81,9 +80,6 @@ int main()
 
 		case 'c':
 		{
-			/*for (int i = 0; i < PLACE_COUNT; i++)
-				if (arr[i].taken)
-					printf("%d: %s %s\n", arr[i].id, arr[i].first_name, arr[i].last_name);*/
             for (int i = 0; i < PLACE_COUNT - places_free; i++)
                 printf("%d: %s, %s\n", arr[ids[i] - 1].id, arr[ids[i] - 1].last_name, arr[ids[i] - 1].first_name);
             break;
@@ -126,7 +122,6 @@ int main()
 				arr[seatCode - 1].taken = 1;
 				strcpy(arr[seatCode - 1].first_name, firstName);
 				strcpy(arr[seatCode - 1].last_name, lastName);
-                //places_free--;
                 add(seatCode - 1);
 			}
 			break;
@@ -151,31 +146,12 @@ int main()
 				break;
 			}
 			
-			/*printf ("Enter your first name: ");
-                        scanf("%s", firstName);
-                        getchar();
-			if (strcmp(firstName, arr[seatCode - 1].first_name) != 0)
-			{
-                                printf("Error: incorrect first name\n");
-                                break;
-                        }	
-                        printf("Enter your last name: ");
-                        scanf("%s", lastName);
-                        getchar();
-			if (strcmp(lastName, arr[seatCode - 1].last_name) != 0)
-                        {
-                                printf("Error: incorrect last name\n");
-                                break;
-                        }
-             */
-
          		printf("You want to unbook seat #%d for passenger %s %s. Press \'y\' to confirm unbooking.\n", seatCode, arr[seatCode - 1].first_name, arr[seatCode - 1].last_name);
                         scanf("%c", &confirm);
                         getchar();
 			if (confirm == 'y')
             {
 				arr[seatCode - 1].taken = 0;
-                //places_free++;
                 rem(arr[seatCode - 1].id);
             }
 			break;
@@ -198,6 +174,7 @@ int main()
 	return 0;
 }
 
+// Method adds new element to the array of taken seats so that it remains sorted alphabetically
 void add (int idx)
 {
     ids[PLACE_COUNT - places_free] = arr[idx].id;
@@ -214,6 +191,7 @@ void add (int idx)
     places_free--;
 }
 
+// Placing an element to the tail of the array of taken seats so that it is not seen anymore
 void rem(int idx)
 {
     int indexof;
